@@ -1,0 +1,29 @@
+#: import main studentdb
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+StudentDB:
+ 
+<StudentDB>:
+    orientation: "vertical"
+    student_list: students_list_view
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Load Programs"
+            size_hint_x: 15
+            on_press: root.loadProgs()
+        Button:
+            text: "Launch Program"
+            size_hint_x: 15
+            on_press: root.launchProgs()
+ 
+    # Define starting data and point to the ListItemButton
+    # in the Python code
+    ListView:
+        id: students_list_view
+        adapter:
+            ListAdapter(data=[" "], cls=main.StudentListButton)
