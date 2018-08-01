@@ -18,27 +18,19 @@ class StudentDB(BoxLayout):
     student_list = ObjectProperty()
     prog_list = {}
 
-    def build(self):
-        Window.bind(on_dropfile=self._on_file_drop)
-        print("gofuckyourself")
-        return
-
-    def _on_file_drop(self, window, file_path):
-        print("go fuck yourself")
-        return
-
     def loadProgs(self):
         for root, dirs, files in os.walk("D:\Games"):
             for file in files:
-                if file.endswith(".exe") and not file.startswith("vc"):
-                    # Get the student name from the TextInputs
-                    student_name = file
-                    self.prog_list[student_name] = os.path.join(root, file)
-                    # Add the student to the ListView
-                    self.student_list.adapter.data.extend([student_name])
-            
-                    # Reset the ListView
-                    self.student_list._trigger_reset_populate()
+                if not file.startswith("vc"):
+                    if file.endswith(".exe"):
+                        # Get the student name from the TextInputs
+                        student_name = file
+                        self.prog_list[student_name] = os.path.join(root, file)
+                        # Add the student to the ListView
+                        self.student_list.adapter.data.extend([student_name])
+                
+                        # Reset the ListView
+                        self.student_list._trigger_reset_populate()
     def launchProgs(self):
         # If a list item is selected
         if self.student_list.adapter.selection:
